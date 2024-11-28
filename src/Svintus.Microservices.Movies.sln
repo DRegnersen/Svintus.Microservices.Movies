@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Svintus.Microservices.Movies", "Svintus.Microservices.Movies\Svintus.Microservices.Movies.csproj", "{5FCD1669-B52C-4558-B4D5-3BE6FAC4ED17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Svintus.Movies.DataAccess", "Svintus.Movies.DataAccess\Svintus.Movies.DataAccess.csproj", "{4E38A4A2-E9BA-44C4-83CA-4D4775FB7719}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FCD1669-B52C-4558-B4D5-3BE6FAC4ED17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FCD1669-B52C-4558-B4D5-3BE6FAC4ED17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FCD1669-B52C-4558-B4D5-3BE6FAC4ED17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FCD1669-B52C-4558-B4D5-3BE6FAC4ED17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E38A4A2-E9BA-44C4-83CA-4D4775FB7719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E38A4A2-E9BA-44C4-83CA-4D4775FB7719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E38A4A2-E9BA-44C4-83CA-4D4775FB7719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E38A4A2-E9BA-44C4-83CA-4D4775FB7719}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

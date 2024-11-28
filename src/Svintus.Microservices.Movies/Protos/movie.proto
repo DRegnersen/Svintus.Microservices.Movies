@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "Svintus.Microservices.Movies";
+
+package movie;
+
+service MovieService {
+  rpc GetRandomMovies (GetRandomMoviesRequest) returns (GetRandomMoviesResponse);
+  rpc RateMovies (RateMoviesRequest) returns (RateMoviesResponse);
+}
+
+message GetRandomMoviesRequest {
+  uint32 moviesNumber = 1;
+}
+
+message GetRandomMoviesResponse {
+  repeated Movie movies = 1;
+}
+
+message Movie{
+  int32 id = 1;
+  string name = 2;
+}
+
+message RateMoviesRequest {
+  repeated MovieRate rates = 1;
+}
+
+message RateMoviesResponse {
+  bool success = 1;
+}
+
+message MovieRate {
+  int32 movieId = 1;
+  uint32 rate = 2;
+}

@@ -1,0 +1,7 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+/src/.idea/
+/src/Svintus.Microservices.Movies.sln.DotSettings.user

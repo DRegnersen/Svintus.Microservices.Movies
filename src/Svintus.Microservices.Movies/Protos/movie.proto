@@ -7,6 +7,7 @@ package movie;
 service MovieService {
   rpc GetRandomMovies (GetRandomMoviesRequest) returns (GetRandomMoviesResponse);
   rpc RateMovies (RateMoviesRequest) returns (RateMoviesResponse);
+  rpc GetRecommendedMovies (GetRecommendedMoviesRequest) returns (GetRecommendedMoviesResponse);
 }
 
 message GetRandomMoviesRequest {
@@ -18,12 +19,13 @@ message GetRandomMoviesResponse {
 }
 
 message Movie{
-  int32 id = 1;
-  string name = 2;
+  int64 id = 1;
+  string title = 2;
 }
 
 message RateMoviesRequest {
-  repeated MovieRate rates = 1;
+  int64 chatId = 1;
+  repeated MovieRate rates = 2;
 }
 
 message RateMoviesResponse {
@@ -31,6 +33,15 @@ message RateMoviesResponse {
 }
 
 message MovieRate {
-  int32 movieId = 1;
+  int64 movieId = 1;
   uint32 rate = 2;
+}
+
+message GetRecommendedMoviesRequest{
+  int64 chatId = 1;
+  uint32 moviesNumber = 2;
+}
+
+message GetRecommendedMoviesResponse{
+  repeated Movie movies = 1;
 }

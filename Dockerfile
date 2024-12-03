@@ -9,6 +9,9 @@ ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /src
 COPY ["src/Svintus.Microservices.Movies/Svintus.Microservices.Movies.csproj", "Svintus.Microservices.Movies/"]
+COPY ["src/Svintus.Movies.Application/Svintus.Movies.Application.csproj", "Svintus.Movies.Application/"]
+COPY ["src/Svintus.Movies.DataAccess/Svintus.Movies.DataAccess.csproj", "Svintus.Movies.DataAccess/"]
+COPY ["src/Svintus.Movies.Integrations/Svintus.Movies.Integrations.csproj", "Svintus.Movies.Integrations/"]
 RUN dotnet restore "Svintus.Microservices.Movies/Svintus.Microservices.Movies.csproj"
 
 COPY . .

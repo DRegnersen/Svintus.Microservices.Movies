@@ -1,8 +1,12 @@
 using Svintus.Microservices.Movies.Services;
+using Svintus.Movies.Application;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
-builder.Services.AddGrpc();
+builder.Services
+    .AddApplication(configuration)
+    .AddGrpc();
 
 var app = builder.Build();
 

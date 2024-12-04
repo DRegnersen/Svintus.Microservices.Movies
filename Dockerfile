@@ -2,7 +2,6 @@
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -14,7 +13,7 @@ COPY ["src/Svintus.Movies.DataAccess/Svintus.Movies.DataAccess.csproj", "Svintus
 COPY ["src/Svintus.Movies.Integrations/Svintus.Movies.Integrations.csproj", "Svintus.Movies.Integrations/"]
 RUN dotnet restore "Svintus.Microservices.Movies/Svintus.Microservices.Movies.csproj"
 
-COPY . .
+COPY src ./
 WORKDIR "/src/Svintus.Microservices.Movies"
 RUN dotnet build "Svintus.Microservices.Movies.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

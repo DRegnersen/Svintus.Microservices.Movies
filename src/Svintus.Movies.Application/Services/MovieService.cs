@@ -53,7 +53,7 @@ internal sealed class MovieService(
 
     public async Task<MovieModel[]> GetRecommendedMoviesAsync(long chatId, int? moviesNumber = null)
     {
-        var rating = await ratingRepository.FindRatingAsync(chatId) ?? throw new KeyNotFoundException();
+        var rating = await ratingRepository.FindRatingAsync(chatId) ?? throw new KeyNotFoundException($"Rating with chatId {chatId} was not found");
         MovieRecommendation[]? recomms;
 
         if (moviesNumber.HasValue)

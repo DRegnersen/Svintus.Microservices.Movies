@@ -1,4 +1,5 @@
 ﻿using Svintus.Movies.Application.Models;
+using Svintus.Movies.Application.Models.Results;
 
 namespace Svintus.Movies.Application.Services.Abstractions;
 
@@ -8,5 +9,5 @@ public interface IMovieService
 
     Task RateMoviesAsync(long chatId, MovieRateModel[] rates);
 
-    Task<MovieModel[]> GetRecommendedMoviesAsync(long chatId, int? moviesNumber = null);
+    Task<Result<MovieModel[], Error>> GetRecommendedMoviesAsync(long chatId, int? moviesNumber = null);
 }

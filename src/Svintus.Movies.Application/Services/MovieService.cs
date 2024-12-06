@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Svintus.Movies.Application.Models;
 using Svintus.Movies.Application.Models.Options;
+using Svintus.Movies.Application.Models.Results;
 using Svintus.Movies.Application.Services.Abstractions;
 using Svintus.Movies.DataAccess.Models;
 using Svintus.Movies.DataAccess.Services.Abstractions;
@@ -51,9 +52,14 @@ internal sealed class MovieService(
         }
     }
 
-    public async Task<MovieModel[]> GetRecommendedMoviesAsync(long chatId, int? moviesNumber = null)
+    public async Task<Result<MovieModel[], Error>> GetRecommendedMoviesAsync(long chatId, int? moviesNumber = null)
     {
-        var rating = await ratingRepository.FindRatingAsync(chatId) ?? throw new KeyNotFoundException($"Rating with chatId {chatId} was not found");
+        var rating = await ratingRepository.FindRatingAsync(chatId);
+        if (rating is null)
+        {
+            return new Error(ResultCode.ChatIdNotFound, $"Rating with chat id {chatId} was not found");
+        }
+
         MovieRecommendation[]? recomms;
 
         if (moviesNumber.HasValue)

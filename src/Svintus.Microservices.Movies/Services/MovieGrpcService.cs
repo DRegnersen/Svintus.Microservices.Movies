@@ -1,5 +1,7 @@
 ﻿using Grpc.Core;
+using Svintus.Microservices.Movies.Extensions;
 using Svintus.Movies.Application.Models;
+using Svintus.Movies.Application.Models.Results;
 using Svintus.Movies.Application.Services.Abstractions;
 
 namespace Svintus.Microservices.Movies.Services;
@@ -14,14 +16,14 @@ public sealed class MovieGrpcService(IMovieService movieService) : MovieService.
 
         var response = new GetRandomMoviesResponse();
         response.Movies.Add(movies.Select(Mapper.Map));
-
+        
         return response;
     }
 
     public override async Task<RateMoviesResponse> RateMovies(RateMoviesRequest request, ServerCallContext context)
     {
         await movieService.RateMoviesAsync(request.ChatId, request.Rates.Select(Mapper.Map).ToArray());
-
+        
         return new RateMoviesResponse { Success = true };
     }
 
@@ -29,10 +31,12 @@ public sealed class MovieGrpcService(IMovieService movieService) : MovieService.
     {
         var moviesNumber = request.MoviesNumber is 0 or > int.MaxValue ? null : (int?)request.MoviesNumber;
 
-        var movies = await movieService.GetRecommendedMoviesAsync(request.ChatId, moviesNumber);
+        var moviesResult = await movieService.GetRecommendedMoviesAsync(request.ChatId, moviesNumber);
 
+        RpcException.ThrowIfFailed(moviesResult);
+        
         var response = new GetRecommendedMoviesResponse();
-        response.Movies.Add(movies.Select(Mapper.Map));
+        response.Movies.Add(moviesResult.Value.Select(Mapper.Map));
 
         return response;
     }
@@ -56,6 +60,21 @@ file static class Mapper
         }
 
         return new MovieRateModel(rateModel.MovieId, (int)rateModel.Rate);
+    }
+}
+
+#endregion
+
+#region Exceptions
+
+file static class RpcException
+{
+    public static void ThrowIfFailed<TValue>(Result<TValue, Error> result)
+    {
+        if (result.IsSuccess)
+            return;
+
+        throw result.Error.ToRpcStatus().ToRpcException();
     }
 }
 

@@ -26,7 +26,11 @@ internal static class ErrorExtensions
             {
                 FieldViolations =
                 {
-                    new BadRequest.Types.FieldViolation { Field = "chatId", Description = error.Message }
+                    new BadRequest.Types.FieldViolation
+                    {
+                        Field = "chatId",
+                        Description = error.Message
+                    }
                 }
             })
         }

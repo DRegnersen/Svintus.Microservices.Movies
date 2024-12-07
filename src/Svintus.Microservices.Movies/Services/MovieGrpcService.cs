@@ -16,14 +16,14 @@ public sealed class MovieGrpcService(IMovieService movieService) : MovieService.
 
         var response = new GetRandomMoviesResponse();
         response.Movies.Add(movies.Select(Mapper.Map));
-        
+
         return response;
     }
 
     public override async Task<RateMoviesResponse> RateMovies(RateMoviesRequest request, ServerCallContext context)
     {
         await movieService.RateMoviesAsync(request.ChatId, request.Rates.Select(Mapper.Map).ToArray());
-        
+
         return new RateMoviesResponse { Success = true };
     }
 
@@ -34,7 +34,7 @@ public sealed class MovieGrpcService(IMovieService movieService) : MovieService.
         var moviesResult = await movieService.GetRecommendedMoviesAsync(request.ChatId, moviesNumber);
 
         RpcException.ThrowIfFailed(moviesResult);
-        
+
         var response = new GetRecommendedMoviesResponse();
         response.Movies.Add(moviesResult.Value.Select(Mapper.Map));
 
@@ -54,12 +54,12 @@ file static class Mapper
 
     public static MovieRateModel Map(MovieRate rateModel)
     {
-        if (rateModel.Rate > int.MaxValue)
+        if (rateModel.Rate <= int.MaxValue)
         {
-            throw new ArgumentOutOfRangeException(nameof(rateModel.Rate));
+            return new MovieRateModel(rateModel.MovieId, (int)rateModel.Rate);
         }
 
-        return new MovieRateModel(rateModel.MovieId, (int)rateModel.Rate);
+        throw new ArgumentOutOfRangeException(nameof(rateModel.Rate));
     }
 }
 

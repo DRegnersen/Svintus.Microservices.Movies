@@ -2,7 +2,7 @@
 
 namespace Svintus.Movies.Integrations.RecommModel.Models.Dto.Serialization;
 
-[JsonSourceGenerationOptions(DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
+[JsonSourceGenerationOptions(DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower)]
 [JsonSerializable(typeof(CreateUserRequestDto))]
 [JsonSerializable(typeof(UpdateUserRequestDto))]
 [JsonSerializable(typeof(RecommsResponseDto), GenerationMode = JsonSourceGenerationMode.Metadata)]

@@ -43,6 +43,6 @@ internal sealed class RatingRepository(IMongoClient client, IOptions<MongoReposi
     private async Task<long> GenerateUserIdAsync()
     {
         var actualUsersNumber = await _collection.CountDocumentsAsync(FilterDefinition<UserRating>.Empty);
-        return FictitiousUsersNumber + actualUsersNumber + 1;
+        return FictitiousUsersNumber + actualUsersNumber;
     }
 }

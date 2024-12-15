@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Svintus.Movies.XunitKit", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Svintus.Movies.Integrations.Tests", "Svintus.Movies.Integrations.Tests\Svintus.Movies.Integrations.Tests.csproj", "{66AB9B68-B2C0-4401-92D9-DFD607D66AF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Svintus.Movies.Application.Tests", "Svintus.Movies.Application.Tests\Svintus.Movies.Application.Tests.csproj", "{98EE059D-C1A5-42A6-8CDD-1FEC4880C99E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,9 +46,14 @@ Global
 		{66AB9B68-B2C0-4401-92D9-DFD607D66AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66AB9B68-B2C0-4401-92D9-DFD607D66AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66AB9B68-B2C0-4401-92D9-DFD607D66AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EE059D-C1A5-42A6-8CDD-1FEC4880C99E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EE059D-C1A5-42A6-8CDD-1FEC4880C99E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98EE059D-C1A5-42A6-8CDD-1FEC4880C99E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EE059D-C1A5-42A6-8CDD-1FEC4880C99E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4C578B6D-68B1-453B-AF37-50F4BA0A2F69} = {3AD4D9ED-F081-412E-974B-22BD086185C4}
 		{66AB9B68-B2C0-4401-92D9-DFD607D66AF3} = {3AD4D9ED-F081-412E-974B-22BD086185C4}
+		{98EE059D-C1A5-42A6-8CDD-1FEC4880C99E} = {3AD4D9ED-F081-412E-974B-22BD086185C4}
 	EndGlobalSection
 EndGlobal

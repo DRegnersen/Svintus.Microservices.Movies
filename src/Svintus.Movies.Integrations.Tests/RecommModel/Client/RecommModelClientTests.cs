@@ -1,11 +1,7 @@
 ﻿using System.Net;
-using System.Net.Http.Json;
-using FluentAssertions;
-using Microsoft.AspNetCore.WebUtilities;
 using RichardSzalay.MockHttp;
 using Svintus.Movies.Integrations.RecommModel.Client;
 using Svintus.Movies.Integrations.RecommModel.Models;
-using Svintus.Movies.Integrations.RecommModel.Models.Dto;
 using Svintus.Movies.XunitKit.AutoFixture.Moq;
 using Xunit;
 
@@ -27,7 +23,7 @@ public sealed class RecommModelClientTests
         // Act & Assert
         await Assert.ThrowsAsync<HttpRequestException>(async () => await sut.CreateUserAsync(userId, rates));
     }
-    
+
     [Theory]
     [AutoMoqData]
     internal async Task CreateUserAsync_EverythingIsOk_AwaitsClient(long userId, UserMovieRate[] rates)
@@ -42,7 +38,7 @@ public sealed class RecommModelClientTests
         // Act & Assert
         await sut.CreateUserAsync(userId, rates);
     }
-    
+
     [Theory]
     [AutoMoqData]
     internal async Task UpdateUserAsync_UnsuccessfulStatusCode_ThrowsException(long userId, UserMovieRate[] rates)
@@ -57,7 +53,7 @@ public sealed class RecommModelClientTests
         // Act & Assert
         await Assert.ThrowsAsync<HttpRequestException>(async () => await sut.UpdateUserAsync(userId, rates));
     }
-    
+
     [Theory]
     [AutoMoqData]
     internal async Task UpdateUserAsync_EverythingIsOk_AwaitsClient(long userId, UserMovieRate[] rates)
@@ -72,28 +68,6 @@ public sealed class RecommModelClientTests
         // Act & Assert
         await sut.UpdateUserAsync(userId, rates);
     }
-    
-    [Theory]
-    [AutoMoqData]
-    internal async Task GetRecommendationsAsync_EverythingIsOk_ReturnsRecommendations(
-        long userId, 
-        int recommsNumber,
-        RecommsResponseDto clientResponse)
-    {
-        // Arrange
-        var sut = new RecommModelClient(HttpClientMock.Setup(
-            HttpMethod.Get,
-            QueryHelpers.AddQueryString($"/api/recomms/{userId}", "size", recommsNumber.ToString()),
-            HttpStatusCode.OK,
-            clientResponse 
-        ));
-
-        // Act
-        var result = await sut.GetRecommendationsAsync(userId, recommsNumber);
-        
-        // Assert
-        result.Select(r => r.MovieId).Should().BeEquivalentTo(clientResponse.MovieIds);
-    }
 }
 
 #region Fixtures
@@ -106,21 +80,6 @@ file static class HttpClientMock
     {
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.When(verb, endpoint).Respond(_ => new HttpResponseMessage(statusCode));
-
-        var client = mockHttp.ToHttpClient();
-        client.BaseAddress = new Uri(BaseAddress);
-
-        return client;
-    }
-
-    public static HttpClient Setup<TResponse>(HttpMethod verb, string endpoint, HttpStatusCode statusCode,
-        TResponse response)
-    {
-        var mockHttp = new MockHttpMessageHandler();
-        mockHttp.When(verb, endpoint).Respond(_ => new HttpResponseMessage(statusCode)
-        {
-            Content = JsonContent.Create(response),
-        });
 
         var client = mockHttp.ToHttpClient();
         client.BaseAddress = new Uri(BaseAddress);
